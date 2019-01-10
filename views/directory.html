@@ -1,0 +1,21 @@
+<div class="content">
+    <button ng-click="order = 'name'">Order by name</button>
+    <button ng-click="order = 'belt'">Order by belt</button>
+    <input type="text" ng-model="search" placeholder="Search for dev">
+    <p class="empty-message" ng-show="verificaDevs()">There aren't devs available</p>
+    <ul id="dev-list">
+      <li ng-repeat="dev in devs | orderBy: order | filter: search" ng-show="dev.available">        
+        <img ng-src="{{ dev.thumb }}" alt="Thumb for dev" style="margin:-10px 10px 0 0; float: left; width: 50px;">
+        <h3>{{ dev.name }} - {{ dev.rate | currency: 'R$' }}</h3>
+        <div class="remove" ng-click="removeDev(dev)">x</div>
+        <span class="belt" style="background:{{ dev.belt }};">{{ dev.belt }} belt</span>
+      </li>
+    </ul>
+    <form ng-submit="addDev()">
+      <input type="text" placeholder="Name" ng-model="newDev.name">
+      <input type="text" placeholder="Belt" ng-model="newDev.belt">
+      <input type="text" placeholder="Rate" ng-model="newDev.rate">
+      <input type="submit" value="Add new Dev">
+    </form>
+    <a href="" ng-click="removeAll()">Remove all Devs</a>
+</div>
